@@ -18,7 +18,7 @@ func (tl *loggerImpl) sendDeployToChat(deployInfo map[string]string) {
 	text := tl.formatDeployMessage(deployInfo)
 
 	msg := tgbotapi.NewMessage(tl.logChatID, text)
-	msg.ParseMode = "Markdown"
+	
 	
 	if _, err := tl.bot.Send(msg); err != nil {
 		log.Printf("❌ Не удалось отправить уведомление о деплое: %v", err)
@@ -69,7 +69,7 @@ func (tl *loggerImpl) formatDeployMessage(deployInfo map[string]string) string {
 
 	additionalText := additionalInfo.String()
 	if additionalText != "" {
-		additionalText = "\n📊 *Дополнительно:*\n" + additionalText
+		additionalText = "\n📊 Дополнительно:\n" + additionalText
 	}
 
 	botUsername := "unknown"
@@ -78,16 +78,16 @@ func (tl *loggerImpl) formatDeployMessage(deployInfo map[string]string) string {
 	}
 
 	return fmt.Sprintf(
-		"🚀 *УВЕДОМЛЕНИЕ О ДЕПЛОЕ*\n\n"+
-			"📦 *Версия:* %s\n"+
-			"🔧 *Окружение:* %s\n"+
-			"🌿 *Ветка:* %s\n"+
-			"📝 *Коммит:* `%s`\n"+
-			"👤 *Деплойер:* %s\n"+
-			"⏰ *Время:* %s\n"+
-			"🤖 *Бот:* @%s\n"+
+		"🚀 УВЕДОМЛЕНИЕ О ДЕПЛОЕ\n\n"+
+			"📦 Версия: %s\n"+
+			"🔧 Окружение: %s\n"+
+			"🌿 Ветка: %s\n"+
+			"📝 Коммит: %s\n"+
+			"👤 Деплойер: %s\n"+
+			"⏰ Время: %s\n"+
+			"🤖 Бот: @%s\n"+
 			"%s\n"+
-			"✅ *Деплой успешно завершен!*",
+			"✅ Деплой успешно завершен!",
 		version,
 		environment,
 		branch,
